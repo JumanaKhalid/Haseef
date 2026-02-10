@@ -41,7 +41,7 @@
         #invoice-section {
             display: none;
             background: white;
-            max-width: 300px; /* Receipt-style width */
+            max-width: 300px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -102,7 +102,6 @@
 
     <div class="max-w-md mx-auto bg-white p-6 rounded-3xl shadow-lg no-print">
         <div class="mb-4">
-            <!-- تم تغيير المسمى هنا من اسم الشخص إلى اسم المشارك -->
             <label class="block font-bold mb-2 text-sm">اسم المشارك:</label>
             <input type="text" id="userName" placeholder="أدخل الاسم هنا..." class="w-full p-3 border-2 border-purple-100 rounded-xl outline-none text-sm">
         </div>
@@ -199,11 +198,19 @@
 
             const resultElement = document.getElementById('resResult');
             
-            if (blue >= 3 && blue <= 5) {
+            // المنطق الجديد للحساب
+            if (blue > yellow || yellow > blue) {
+                // إذا كان أحدهما أكبر من الآخر
                 resultElement.innerText = "حصيـف";
                 resultElement.style.backgroundColor = "#000";
                 resultElement.style.color = "#fff";
+            } else if (blue === yellow && blue !== 0) {
+                // إذا تساويا (بشرط ألا يكون كلاهما صفراً)
+                resultElement.innerText = "تعـادل";
+                resultElement.style.backgroundColor = "transparent";
+                resultElement.style.color = "#000";
             } else {
+                // حالة الصفر أو عدم الإدخال
                 resultElement.innerText = "خفيـف";
                 resultElement.style.backgroundColor = "transparent";
                 resultElement.style.color = "#000";
